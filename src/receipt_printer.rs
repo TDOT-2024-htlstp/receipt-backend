@@ -45,7 +45,7 @@ impl ReceiptPrinter {
             .writeln(&format!("{:>43}", "200 Punkte"))?
             .double_strike(false)?
             .feed()?
-            .writeln("Um Ihre Produkte abzuholen, warten Sie, bis auf dem Bildschirm angezeigt wird, dass Ihre Bestellung fertig ist. Dannach kommen Sie zum schalter und wir geben Ihnen die Produkte.")?
+            .writeln("Um Ihre Produkte abzuholen, warten Sie, bis auf dem Bildschirm angezeigt wird, dass Ihre Bestellung fertig ist. Dannach kommen Sie zum Schalter und wir geben Ihnen die Produkte.")?
             .feed()?
             .writeln("Informatik HTL St. Poelten")?
             .qrcode_option("https://www.htlstp.ac.at/abteilungen/informatik", QRCodeOption::new(QRCodeModel::Model1, 6, QRCodeCorrectionLevel::L))?
