@@ -22,7 +22,7 @@ impl ReceiptPrinter {
             .justify(JustifyMode::CENTER)?
             .bit_image("htl_logo.pbm")?
             .feeds(2)?
-            .size(4,4)?
+            .size(4, 4)?
             .double_strike(true)?
             .writeln(&format!("{:04}", order.id))?
             .double_strike(false)?
@@ -33,16 +33,18 @@ impl ReceiptPrinter {
             // TODO SHOW ALL PRODUCTS
             .writeln(&format!("{:>5}  {:<24}  {:>10}", "Menge", "Bezeichnung", "Preis"))?;
 
-        for entry in order.entries {
+        for entry in &order.entries {
             self.printer.writeln(&format!(
                 "{:>5}  {:<24}  {:>3} Punkte",
-                entry.amount, entry.product.name, entry.amount*entry.product.price
+                entry.amount, entry.product.name, entry.amount * entry.product.price
             ))?;
         }
 
+        let cost: u32 = order.entries.iter().map(|order| order.product.price * order.amount).sum();
+
         self.printer.writeln(&format!("{}", "-".repeat(43)))?
             .double_strike(true)?
-            .writeln(&format!("{:>43}", "200 Punkte"))?
+            .writeln(&format!("{:>43}", &format!("{} Punkte", cost)))?
             .double_strike(false)?
             .feed()?
             .writeln("Um Ihre Produkte abzuholen, warten Sie, bis auf dem Bildschirm angezeigt wird, dass Ihre Bestellung fertig ist. Dannach kommen Sie zum Schalter und wir geben Ihnen die Produkte.")?

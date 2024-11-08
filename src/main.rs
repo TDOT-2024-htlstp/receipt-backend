@@ -32,6 +32,9 @@ async fn print_order(Json(order): Json<Order>) -> StatusCode {
             printer.print_order(order).unwrap();
             StatusCode::OK
         }
-        Err(_) => StatusCode::INTERNAL_SERVER_ERROR,
+        Err(e) => {
+            println!("{}", e);
+            StatusCode::INTERNAL_SERVER_ERROR
+        },
     }
 }
